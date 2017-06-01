@@ -1,0 +1,24 @@
+{
+    "name": "hskyzhou/repository",
+    "description": "Laravel 5 - Repositories to  the database layer",
+    "authors": [
+        {
+            "name": "hsky",
+            "email": "xezw211@126.com",
+            "homepage" : "http://hsky.me",
+            "role": "Developer"
+        }
+    ],
+    "support" :{
+    	"email" : "xezw211@126.com"
+    },
+    "require": {
+    	"php": ">=5.4",
+	    "illuminate/support": "~5.0"
+    },
+    "autoload" : {
+    	"psr-4" : {
+    		"HskyZhou\\Repository\\" : "src"
+    	}
+    }
+}

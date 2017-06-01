@@ -1,0 +1,17 @@
+<?php
+
+$NAMESPACE$
+
+class $CLASS$
+{
+	/**
+	 * construct
+	 *
+	 * @return void
+	 */
+	public function __construct()
+	{
+		
+	}
+
+}
