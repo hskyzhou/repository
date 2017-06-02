@@ -27,6 +27,15 @@ edit config.php
 ],
 ```
 
+如果需要使用接口，则在使用命令之后，在如上的数组中添加
+
+```php
+'providers' => [
+    ...
+	App\Providers\RepositoryServiceProvider::class,
+],
+```
+
 Publish Configuration
 
 ```terminal

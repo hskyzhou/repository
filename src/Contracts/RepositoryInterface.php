@@ -59,26 +59,6 @@ interface RepositoryInterface
     public function all($columns = ['*']);
 
     /**
-     * Retrieve all data of repository, paginated
-     *
-     * @param null $limit
-     * @param array $columns
-     *
-     * @return mixed
-     */
-    public function paginate($limit = null, $columns = ['*']);
-
-    /**
-     * Retrieve all data of repository, simple paginated
-     *
-     * @param null $limit
-     * @param array $columns
-     *
-     * @return mixed
-     */
-    public function simplePaginate($limit = null, $columns = ['*']);
-
-    /**
      * Find data by id
      *
      * @param       $id
