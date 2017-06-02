@@ -36,6 +36,10 @@ return [
             'models'       => 'Repositories\\Models',
             'repositories' => 'Repositories\\Eloquents',
             'interfaces'   => 'Repositories\\Contracts',
+            /*处理业务逻辑*/
+            'services'   => 'Services',
+            /*处理页面数据*/
+            'presenters'   => 'Presenters',
             'provider'     => 'RepositoryServiceProvider',
             'stubsOverridePath' => app_path()
         ]

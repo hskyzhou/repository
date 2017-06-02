@@ -5,7 +5,7 @@ namespace HskyZhou\Repository\Consoles;
  * Class RepositoryEloquentGenerator
  * @package HskyZhou\Repository\Consoles
  */
-class ProcessGenerator extends Generator
+class ServiceGenerator extends Generator
 {
 
     /**
@@ -13,7 +13,7 @@ class ProcessGenerator extends Generator
      *
      * @var string
      */
-    protected $stub = 'process';
+    protected $stub = 'service';
 
     /**
      * Get root namespace.
@@ -32,7 +32,7 @@ class ProcessGenerator extends Generator
      */
     public function getPathConfigNode()
     {
-        return 'processes';
+        return 'services';
     }
 
     /**
@@ -42,7 +42,7 @@ class ProcessGenerator extends Generator
      */
     public function getPath()
     {
-        return $this->getBasePath() . '/' . parent::getConfigGeneratorClassPath($this->getPathConfigNode(), true) . '/' . $this->getName() . 'Process.php';
+        return $this->getBasePath() . '/' . parent::getConfigGeneratorClassPath($this->getPathConfigNode(), true) . '/' . $this->getName() . 'Service.php';
     }
 
     /**
@@ -53,5 +53,25 @@ class ProcessGenerator extends Generator
     public function getBasePath()
     {
         return config('repository.generator.basePath', app_path());
+    }
+
+    /**
+     * Get array replacements.
+     *
+     * @return array
+     */
+    public function getReplacements()
+    {
+        $repository = parent::getRootNamespace() . parent::getConfigGeneratorClassPath('interfaces') . '\\' . $this->getName() . 'Repository;';
+        
+        $repository = str_replace(["\\",'/'], '\\', $repository);
+
+        $repositoryClass = $this->getName() . 'Repository';
+
+        return array_merge(parent::getReplacements(), [
+            'repository'    => $repository,
+            'repositoryClass' => $repositoryClass,
+            'name' => lcfirst($this->getName()),
+        ]);
     }
 }

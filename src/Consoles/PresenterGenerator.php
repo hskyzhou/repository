@@ -5,7 +5,7 @@ namespace HskyZhou\Repository\Consoles;
  * Class RepositoryEloquentGenerator
  * @package HskyZhou\Repository\Consoles
  */
-class ProcessGenerator extends Generator
+class PresenterGenerator extends Generator
 {
 
     /**
@@ -13,7 +13,7 @@ class ProcessGenerator extends Generator
      *
      * @var string
      */
-    protected $stub = 'process';
+    protected $stub = 'presenter';
 
     /**
      * Get root namespace.
@@ -32,7 +32,7 @@ class ProcessGenerator extends Generator
      */
     public function getPathConfigNode()
     {
-        return 'processes';
+        return 'presenters';
     }
 
     /**
@@ -42,7 +42,7 @@ class ProcessGenerator extends Generator
      */
     public function getPath()
     {
-        return $this->getBasePath() . '/' . parent::getConfigGeneratorClassPath($this->getPathConfigNode(), true) . '/' . $this->getName() . 'Process.php';
+        return $this->getBasePath() . '/' . parent::getConfigGeneratorClassPath($this->getPathConfigNode(), true) . '/' . $this->getName() . 'Presenter.php';
     }
 
     /**

@@ -213,6 +213,12 @@ abstract class Generator
             case ('processes' === $class):
                 $path = config('repository.generator.paths.processes', 'Repositories');
                 break;
+            case ('services' === $class):
+                $path = config('repository.generator.paths.services', 'Repositories');
+                break;
+            case ('presenters' === $class):
+                $path = config('repository.generator.paths.presenters', 'Repositories');
+                break;
             default:
                 $path = '';
         }
@@ -271,6 +277,7 @@ abstract class Generator
             /*抛出文件已存在*/
             throw new FileAlreadyExistsException($path);
         }
+
         if (!$this->filesystem->isDirectory($dir = dirname($path))) {
             $this->filesystem->makeDirectory($dir, 0777, true, true);
         }

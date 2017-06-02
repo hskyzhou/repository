@@ -1,0 +1,21 @@
+<?php
+
+$NAMESPACE$
+
+use $REPOSITORY$
+
+class $CLASS$Service
+{
+	protected $$NAME$Repo;
+	/**
+	 * construct
+	 *
+	 * @return void
+	 */
+	public function __construct(
+		$REPOSITORYCLASS$ $$NAME$Repo
+	){
+		$this->$NAME$Repo = $$NAME$Repo;
+	}
+
+}

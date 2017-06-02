@@ -7,6 +7,8 @@ use HskyZhou\Repository\Consoles\FileAlreadyExistsException;
 use HskyZhou\Repository\Consoles\MigrationGenerator;
 use HskyZhou\Repository\Consoles\ModelGenerator;
 use HskyZhou\Repository\Consoles\ProcessGenerator;
+use HskyZhou\Repository\Consoles\ServiceGenerator;
+use HskyZhou\Repository\Consoles\PresenterGenerator;
 use HskyZhou\Repository\Consoles\RepositoryEloquentGenerator;
 use HskyZhou\Repository\Consoles\RepositoryInterfaceGenerator;
 
@@ -60,8 +62,9 @@ class RepositoryCommand extends Command
             'fields' => $this->option('fillable'),
             'force'  => $this->option('force'),
         ]);
+        $migrationModel->run();
 
-        $this->generators->push($migrationModel);
+        $this->info('Migration created successfully.');
 
         /* add model*/
         $modelGenerator = new ModelGenerator([
@@ -69,24 +72,19 @@ class RepositoryCommand extends Command
             'fillable' => $this->option('fillable'),
             'force'    => $this->option('force'),
         ]);
-
-        $this->generators->push($modelGenerator);
+        $modelGenerator->run();
+        $this->info('Model created successfully.');
 
         /* add repository*/
         $repositoryInterfaceGenerator = new RepositoryInterfaceGenerator([
             'name'  => $this->argument('name'),
             'force' => $this->option('force'),
         ]);
-        $this->generators->push($repositoryInterfaceGenerator);
-
-        /* execute generator*/
-        foreach ($this->generators as $generator) {
-            $generator->run();
-        }
+        $repositoryInterfaceGenerator->run();
+        $this->info('Interface created successfully.');
 
         $model = $modelGenerator->getRootNamespace() . '\\' . $modelGenerator->getName();
         $model = str_replace(["\\",'/'], '\\', $model);
-
         try {
             /* add repository*/
             $repositoryGenerator = new RepositoryEloquentGenerator([
@@ -103,17 +101,32 @@ class RepositoryCommand extends Command
             return false;
         }
 
-        if($this->confirm("do you want to create process layer")){
-            $repository = $repositoryGenerator->getRootNamespace() . '\\' . $repositoryGenerator->getName();
-            $repository = str_replace(["\\",'/'], '\\', $repository);
+        /* 添加 业务逻辑层 */
+        $serviceGenerator = new ServiceGenerator([
+            'name' => $this->argument('name'),
+            'force' => $this->option('force'),
+        ]);
 
+        $serviceGenerator->run();
+        $this->info("Service created successfully.");
+
+        /* 添加 页面渲染层 */
+        $presenterGenerator = new PresenterGenerator([
+            'name' => $this->argument('name'),
+            'force' => $this->option('force'),
+        ]);
+        $presenterGenerator->run();
+        $this->info("Presenter created successfully.");
+
+        /* 添加 数据加工层 */
+        if($this->confirm("do you want to create process layer")){
             $processGenerator = new ProcessGenerator([
                 'name' => $this->argument('name'),
                 'force' => $this->option('force'),
-                'repository' => $repository
             ]);
 
             $processGenerator->run();
+            $this->info("Process created successfully.");
         }
     }
 }

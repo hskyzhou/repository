@@ -22,9 +22,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
      */
     public function boot()
     {
-        $this->publishes([
-            __DIR__ . '/../config/repository.php' => config_path('repository.php')
-        ]);
+        $this->publishes([__DIR__ . '/../config/repository.php' => config_path('repository.php')], 'config');
 
         $this->mergeConfigFrom(__DIR__ . '/../config/repository.php', 'repository');
     }
@@ -38,14 +36,11 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
     public function register()
     {
         $this->commands('HskyZhou\Repository\Consoles\Commands\RepositoryCommand');
-        // $this->commands('HskyZhou\Repository\Consoles\Commands\TransformerCommand');
-        // $this->commands('HskyZhou\Repository\Consoles\Commands\PresenterCommand');
         $this->commands('HskyZhou\Repository\Consoles\Commands\EntityCommand');
-        // $this->commands('HskyZhou\Repository\Consoles\Commands\ValidatorCommand');
-        // $this->commands('HskyZhou\Repository\Consoles\Commands\ControllerCommand');
         $this->commands('HskyZhou\Repository\Consoles\Commands\BindingsCommand');
-        // $this->commands('HskyZhou\Repository\Consoles\Commands\CriteriaCommand');
-        // $this->app->register('HskyZhou\Repository\Providers\EventServiceProvider');
+        $this->commands('HskyZhou\Repository\Consoles\Commands\ProcessCommand');
+        $this->commands('HskyZhou\Repository\Consoles\Commands\ServiceCommand');
+        $this->commands('HskyZhou\Repository\Consoles\Commands\PresenterCommand');
     }
 
 
