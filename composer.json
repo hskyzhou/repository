@@ -1,6 +1,6 @@
 {
     "name": "hskyzhou/repository",
-    "description": "Laravel 5 - Repositories to  the database layer",
+    "description": "Laravel 5, Service - business logic, Presenter - preview deal view, Repository - database layer",
     "authors": [
         {
             "name": "hsky",
