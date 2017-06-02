@@ -1,6 +1,7 @@
 {
     "name": "hskyzhou/repository",
     "description": "Laravel 5, Service - business logic, Presenter - preview deal view, Repository - database layer",
+    "license": "MIT",
     "authors": [
         {
             "name": "hsky",
