@@ -79,8 +79,6 @@ abstract class BaseRepository implements RepositoryInterface
         $this->app = $app;
         $this->criteria = new Collection();
         $this->makeModel();
-        $this->makePresenter();
-        $this->makeValidator();
         $this->boot();
     }
 
